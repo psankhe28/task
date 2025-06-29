@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "cb94d950-12b9-4f6d-96d5-a66a7c32fd6d",
+		"name": "ArchaeoData API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21553642"
+	},
+	"item": [
+		{
+			"name": "Timeline by Root Event",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/timeline/4de9fa2a-3710-4ccc-9cf9-1def397fab3d"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Events by Name, Order, Page, Limit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/events/search?name=phase&sortBy=start_date&sortOrder=asc&page=1&limit=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"events",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "phase"
+						},
+						{
+							"key": "sortBy",
+							"value": "start_date"
+						},
+						{
+							"key": "sortOrder",
+							"value": "asc"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Overlapping Events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/insights/overlapping-events?startDate=2023-01-01T00:00:00Z&endDate=2023-01-20T00:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"insights",
+						"overlapping-events"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2023-01-01T00:00:00Z"
+						},
+						{
+							"key": "endDate",
+							"value": "2023-01-20T00:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Temporal Gaps",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/insights/temporal-gaps?startDate=2023-01-01T08:00:00Z&endDate=2023-01-01T19:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"insights",
+						"temporal-gaps"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2023-01-01T08:00:00Z"
+						},
+						{
+							"key": "endDate",
+							"value": "2023-01-01T19:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Temporal Gaps not found",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/insights/temporal-gaps?startDate=2023-01-01T08:00:00Z&endDate=2023-01-01T09:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"insights",
+						"temporal-gaps"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2023-01-01T08:00:00Z"
+						},
+						{
+							"key": "endDate",
+							"value": "2023-01-01T09:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Event Influence Spreader (Success Case)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/insights/event-influence?sourceEventId=a1b2c3d4-e5f6-4a00-8000-abcdef123456&targetEventId=d4e5f6a7-b8c9-4d33-8003-def4567890ab",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"insights",
+						"event-influence"
+					],
+					"query": [
+						{
+							"key": "sourceEventId",
+							"value": "a1b2c3d4-e5f6-4a00-8000-abcdef123456"
+						},
+						{
+							"key": "targetEventId",
+							"value": "d4e5f6a7-b8c9-4d33-8003-def4567890ab"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Event Influence Spreader (No Path)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/insights/event-influence?sourceEventId=9b8a7c6d-5e4f-3a2b-1c0d-9e8f7a6b5c4d&targetEventId=c8d7e6f5-a4b3-2109-8765-4321fedcba98",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"insights",
+						"event-influence"
+					],
+					"query": [
+						{
+							"key": "sourceEventId",
+							"value": "9b8a7c6d-5e4f-3a2b-1c0d-9e8f7a6b5c4d"
+						},
+						{
+							"key": "targetEventId",
+							"value": "c8d7e6f5-a4b3-2109-8765-4321fedcba98"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ingest data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/m4-air/Documents/kelp/backend/historical_data_2.txt"
+						}
+					]
+				},
+				"url": "http://localhost:3000/api/events/ingest"
+			},
+			"response": []
+		},
+		{
+			"name": "ingest status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/events/ingestion-status/ingest-job-f877e13c-72a0-40c9-a952-982cb82125f7"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Events by Date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/events/search?start_date_after=2023-01-01T00:00:00Z&end_date_before=2023-01-02T23:59:59Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"events",
+						"search"
+					],
+					"query": [
+						{
+							"key": "start_date_after",
+							"value": "2023-01-01T00:00:00Z"
+						},
+						{
+							"key": "end_date_before",
+							"value": "2023-01-02T23:59:59Z"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

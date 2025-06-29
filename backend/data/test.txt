@@ -1,0 +1,5 @@
+e1000000-aaaa-4a00-8000-abcdef000001|Kickoff Meeting|2023-02-01T09:00:00Z|2023-02-01T10:00:00Z|NULL|{"team":"leadership"}
+e1000001-bbbb-4b11-8001-abcdef000002|Requirements Gathering|2023-02-01T10:30:00Z|2023-02-01T11:30:00Z|e1000000-aaaa-4a00-8000-abcdef000001|{"team":"product"}
+e1000002-cccc-4c22-8002-abcdef000003|System Design|2023-02-01T13:00:00Z|2023-02-01T14:00:00Z|e1000001-bbbb-4b11-8001-abcdef000002|{"team":"architecture"}
+e1000003-dddd-4d33-8003-abcdef000004|Implementation Planning|2023-02-01T15:00:00Z|2023-02-01T16:00:00Z|e1000002-cccc-4c22-8002-abcdef000003|{"team":"engineering"}
+e1000004-eeee-4e44-8004-abcdef000005|Development Kickoff|2023-02-01T17:00:00Z|2023-02-01T18:00:00Z|e1000003-dddd-4d33-8003-abcdef000004|{"team":"dev"}
