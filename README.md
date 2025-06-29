@@ -9,4 +9,9 @@ It is a full-stack event timeline application. It allows users to ingest, search
 - [Frontend README](https://github.com/psankhe28/kelp-assignment/blob/main/frontend/README.md)
 - [Backend README](https://github.com/psankhe28/kelp-assignment/blob/main/backend/README.md)
 
+## Deployed Links
+
+- Backend URL: [Backend deployed link](https://task-api-asbl.onrender.com)
+- Frontend URL: [Frontend deployed link](https://task-78bm.onrender.com)
+
 Please refer to the respective README files above for setup instructions and detailed documentation for each part of the project.
