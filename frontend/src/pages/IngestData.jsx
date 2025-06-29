@@ -20,9 +20,13 @@ export default function IngestEvents () {
   return (
     <div className="w-full-md mx-auto p-6 bg-white rounded shadow mt-8">
       <h2 className="text-2xl font-semibold mb-4 text-blue-700">Ingest Events File</h2>
+      <p className="mb-2 text-gray-600 text-sm">
+        You can upload <span className="font-semibold">CSV</span> or <span className="font-semibold">TXT</span> files.
+      </p>
       <div className="flex items-center space-x-3">
         <input
           type="file"
+          accept=".csv,.txt"
           onChange={e => setFile(e.target.files[0])}
           className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
         />

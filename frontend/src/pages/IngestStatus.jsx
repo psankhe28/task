@@ -69,13 +69,24 @@ export default function IngestionStatus() {
               {status.status}
             </span>
           </div>
+          <div className="mb-2">
+            <span className="font-semibold text-gray-700">Processed Lines:</span>{" "}
+            <span>{status.processedLines ?? 0}</span>
+          </div>
+          <div className="mb-2">
+            <span className="font-semibold text-gray-700">Error Lines:</span>{" "}
+            <span>{status.errorLines ?? 0}</span>
+          </div>
+          <div className="mb-2">
+            <span className="font-semibold text-gray-700">Total Lines:</span>{" "}
+            <span>{status.totalLines ?? 0}</span>
+          </div>
           {status.startedAt && (
             <div className="mb-2">
               <span className="font-semibold text-gray-700">Started At:</span>{" "}
               <span>{new Date(status.startedAt).toLocaleString()}</span>
             </div>
           )}
-          {/* Show start_date and end_date if present */}
           {status.start_date && (
             <div className="mb-2">
               <span className="font-semibold text-gray-700">Start Date:</span>{" "}

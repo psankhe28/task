@@ -11,6 +11,10 @@ const db = new Client({
 });
 db.connect();
 
+function isValidUUID(uuid) {
+  return [1, 2, 3, 4, 5].some(version => validator.isUUID(uuid, version));
+}
+
 async function ingestFile(filePath, jobId) {
   const rl = readline.createInterface({
     input: fs.createReadStream(filePath),
@@ -25,6 +29,9 @@ async function ingestFile(filePath, jobId) {
   job.totalLines = 0;
   job.errors = [];
 
+  const isCsv = path.extname(filePath).toLowerCase() === ".csv";
+  const delimiter = isCsv ? "," : "|";
+
   let lineNumber = 0;
 
   for await (const line of rl) {
@@ -33,16 +40,22 @@ async function ingestFile(filePath, jobId) {
 
     if (!line.trim()) continue;
 
-    const parts = line.split("|").map(p => p.trim());
-    if (parts.length !== 6) {
+    if (
+      line.toLowerCase().startsWith("eventid|eventname|startdate|enddate|parentid|researchvalue|description")
+    ) {
+      continue;
+    }
+
+    const parts = line.split(delimiter).map(p => p.trim());
+    if (parts.length !== 7) {
       job.errorLines++;
       job.errors.push(`Line ${lineNumber}: Malformed entry: '${line}'`);
       continue;
     }
 
-    const [event_id, event_name, start, end, parent_id, description] = parts;
+    const [event_id, event_name, start, end, parent_id, research_value, description] = parts;
 
-    if (!validator.isUUID(event_id)) {
+    if (!isValidUUID(event_id)) {
       job.errorLines++;
       job.errors.push(`Line ${lineNumber}: Validation failed - Invalid event_id UUID: '${event_id}'`);
       continue;
@@ -50,13 +63,13 @@ async function ingestFile(filePath, jobId) {
 
     if (!validator.isISO8601(start)) {
       job.errorLines++;
-      job.errors.push(`Line ${lineNumber}: Validation failed - Invalid start date (not ISO 8601): '${start}'`);
+      job.errors.push(`Line ${lineNumber}: Validation failed - Invalid start date: '${start}'`);
       continue;
     }
 
     if (!validator.isISO8601(end)) {
       job.errorLines++;
-      job.errors.push(`Line ${lineNumber}: Validation failed - Invalid end date (not ISO 8601): '${end}'`);
+      job.errors.push(`Line ${lineNumber}: Validation failed - Invalid end date: '${end}'`);
       continue;
     }
 
@@ -69,14 +82,15 @@ async function ingestFile(filePath, jobId) {
     try {
       await db.query(
         `INSERT INTO historical_events (
-          event_id, event_name, start_date, end_date, parent_event_id, description, metadata
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+          event_id, event_name, start_date, end_date, parent_event_id, research_value, description, metadata
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
         [
           event_id,
           event_name,
           new Date(start),
           new Date(end),
           parent_id === "NULL" ? null : parent_id,
+          research_value,
           description,
           { source: path.basename(filePath), line: lineNumber },
         ]
